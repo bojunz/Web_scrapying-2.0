@@ -1,93 +1,118 @@
-# Web_scrapying-2.0
-# 🛠️ Amazon Automation Tool - Timetec
+# 🧾 Timetec Amazon Automation Tool
 
-Automate customer messaging for Amazon orders through Seller Central using a graphical interface built with **PyQt5** and **Selenium**.
+A user-friendly GUI tool using **PyQt5** and **Selenium** to help **Timetec** sellers automatically send messages to Amazon customers via Seller Central.
 
-<img src="https://github.com/bojunz/Web_scrapying-2.0/blob/main/Pyqt_original.png" alt="Demo Login Page GIF" style="border: 2px solid black; max-width: 200%; height: 400px;">
+Supports **manual input** and **Excel-based batch messaging** with full logs, timers, and export features.
+
+## Original Version
+<img src="https://github.com/bojunz/Web_scrapying-2.0/blob/main/Pyqt_original.png" alt="Demo Login Page GIF" style="border: 2px solid black; max-width: 200%; height: 400px;"> <br>
+## Excel Version
+<img src="https://github.com/bojunz/Web_scrapying-2.0/blob/main/Pyqt_Excel.png" alt="Demo Login Page GIF" style="border: 2px solid black; max-width: 200%; height: 400px;">
 ---
 
 ## 📌 Table of Contents
 
-- [📦 Features](#-features)
-- [🧠 Background](#-background)
-- [🖥️ User Interface](#-user-interface)
-- [⚙️ How It Works](#️-how-it-works)
-- [🛠 Installation Guide](#-installation-guide)
-- [🚀 Usage Instructions](#-usage-instructions)
-- [📝 Message Templates](#-message-templates)
-- [📤 Export & Logs](#-export--logs)
-- [🔐 Notes & Precautions](#-notes--precautions)
-- [🤝 Support](#-support)
+- [🚀 Features](#-features)
+- [🧠 Overview](#-overview)
+- [🖥️ Interface Layout](#️-interface-layout)
+- [📄 Excel Format (for Batch Mode)](#-excel-format-for-batch-mode)
+- [⚙️ Installation](#-installation)
+- [📂 How to Use](#-how-to-use)
+  - [Manual Mode](#manual-mode)
+  - [Excel Mode](#excel-mode)
+- [📤 Export & Save Results](#-export--save-results)
+- [🛟 Support](#-support)
 - [📄 License](#-license)
 
 ---
 
-## 📦 Features
+## 🚀 Features
 
-- GUI-based tool for easy use.
-- Login panel with:
-  - Email and password
-  - Country selection
-- Automatically detects the customer's language (English or Spanish).
-- Optional custom message input.
-- Processes multiple Amazon Order IDs (comma-separated).
-- Interacts with Shadow DOM using JavaScript injection for robust performance.
-- Order and system logs displayed in real-time.
-- Export communication results to CSV file.
-- Shortcut support (e.g., press `Enter` to start automation).
-- Visual feedback and error handling with log output.
+✅ Manual input for one-time message sending  
+✅ Batch automation using Excel files  
+✅ Amazon login with email, password, and marketplace selector  
+✅ Real-time order and system logs  
+✅ Shadow DOM interaction with Selenium  
+✅ Auto-detect and confirm buyer language (e.g., Spanish)  
+✅ Elapsed time display & success/failure tracking  
+✅ One-click CSV export  
+✅ Press `Enter` to trigger automation
 
 ---
 
-## 🧠 Background
+## 🧠 Overview
 
-Customer satisfaction and proactive engagement are critical for e-commerce success. This tool helps automate follow-up communication with Amazon customers, saving time and improving service quality for the Timetec team.
+This tool helps sellers streamline communication with customers on Amazon by:
 
----
-
-## 🖥️ User Interface
-
-### Left Panel
-
-- **Login Form**: Enter your Timetec Amazon credentials and country.
-- **Order IDs**: Paste one or more order IDs (comma-separated).
-- **Custom Message**: Optional text area to override the default message.
-- **Start Automation**: Initiates the process.
-- **Support Info**: Displays contact for technical support.
-
-### Right Panel
-
-- **Order Information Log**: Logs per order (success/failure).
-- **General Log**: Logs full system operations and debug info.
-- **Buttons**:
-  - `Clear Content`: Clears logs.
-  - `Export to CSV`: Exports results to CSV format.
+- Supporting **two automation modes**:
+  - 📬 **Manual Mode** – Send message to a single Order ID with a custom message
+  - 📊 **Excel Mode** – Load and send messages to many Order IDs via spreadsheet
+- Logging into Seller Central, navigating to each order, and messaging the buyer
+- Detecting language preferences and using shadow DOM to inject messages
+- Logging results and enabling CSV export
 
 ---
 
-## ⚙️ How It Works
+## 🖥️ Interface Layout
 
-1. **Login to Amazon Seller Central** via Selenium automation.
-2. Navigate to each provided **Order ID**.
-3. Detect the customer's language preference (English/Spanish).
-4. Compose and send a tailored message.
-5. Handle Shadow DOM inputs via JavaScript.
-6. Log results and errors.
-7. Export messages and statuses to a `.csv` file.
+### 🔒 Left Panel
+
+- **Login Section**
+  - Email, password
+  - Country dropdown (e.g., `United States`, `France`, etc.)
+- **Manual Mode Section**
+  - Input Order ID and message
+  - (Optional) Send one message at a time
+- **Excel Mode Section**
+  - Load `.xlsx` file with multiple orders
+  - View progress bar
+- **Summary**
+  - Time elapsed
+  - Success/Failure count
+  - Real-time clock
+- **Start Automation Button**
+  - Triggers automation
+  - Also works with `Enter` key
+
+### 📋 Right Panel
+
+- **Order Log**
+  - Displays success/failure per order
+- **System Log**
+  - Logs application/system-level events and errors
+- **Action Buttons**
+  - `Clear Content`: Clears the order log
+  - `Export to CSV`: Saves results to file
 
 ---
 
-## 🛠 Installation Guide
+## 📄 Excel Format (for Batch Mode)
 
-### Requirements
+To use Excel automation, your `.xlsx` file must include these columns:
 
-- Python 3.7+
-- Google Chrome installed
-- Required Python packages (see below)
+| Column Name | Description                                     |
+|-------------|-------------------------------------------------|
+| ID          | Amazon Order ID (e.g. `112-1234567-8901234`)    |
+| Content     | The message to send                             |
+| Date        | Optional — for tracking                         |
+| Market      | Optional — e.g., "US", "EU"                     |
+| Status      | Leave blank — tool fills in "Success"/"Failed"  |
 
-### Installation Steps
+### ✅ Example:
+
+| ID                 | Content                              | Date       | Market | Status |
+|--------------------|---------------------------------------|------------|--------|--------|
+| 112-1234567-8901234| Thanks for your order! Let us know…   | 2025-05-05 | USA    |        |
+
+---
+
+## ⚙️ Installation
+
+### 1. Requirements
+
+- Python 3.7 or newer
+- Google Chrome (latest version)
+- Pip dependencies:
 
 ```bash
-git clone https://github.com/yourusername/amazon-automation-tool.git
-cd amazon-automation-tool
 pip install -r requirements.txt
